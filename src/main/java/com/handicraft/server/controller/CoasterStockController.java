@@ -15,21 +15,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.handicraft.server.model.PosterStock;
-import com.handicraft.server.service.PosterStockService;
-import com.handicraft.server.service.PosterStockService.StockUpdate;
+import com.handicraft.server.model.CoasterStock;
+import com.handicraft.server.service.CoasterStockService;
+import com.handicraft.server.service.CoasterStockService.StockUpdate;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/posterStock")
-public class PosterStockController {
+@RequestMapping("/coasterStock")
+public class CoasterStockController {
 
     @Autowired
-    private PosterStockService posterStockService;
+    private CoasterStockService coasterStockService;
 
     @GetMapping
-    public List<PosterStock> getAll() {
-        return posterStockService.getAll();
+    public List<CoasterStock> getAll() {
+        return coasterStockService.getAll();
     }
 
     /** Bulk update of stock counts, e.g. [{ "id": "...", "stock": 120 }]. Returns the full, updated list. */
@@ -38,7 +38,7 @@ public class PosterStockController {
             @RequestBody List<StockUpdate> updates,
             @RequestHeader(value = "X-Employee-Name", required = false) String performedBy) {
         try {
-            return ResponseEntity.ok(posterStockService.updateStock(updates, performedBy));
+            return ResponseEntity.ok(coasterStockService.updateStock(updates, performedBy));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -49,11 +49,11 @@ public class PosterStockController {
     public ResponseEntity<?> getHistory(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,
-            @RequestParam(required = false) String posterStockId) {
-        LocalDate end = to != null ? to : posterStockService.today();
+            @RequestParam(required = false) String coasterStockId) {
+        LocalDate end = to != null ? to : coasterStockService.today();
         LocalDate start = from != null ? from : end.minusDays(6);
         try {
-            return ResponseEntity.ok(posterStockService.getHistory(start, end, posterStockId));
+            return ResponseEntity.ok(coasterStockService.getHistory(start, end, coasterStockId));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

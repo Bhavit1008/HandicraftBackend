@@ -3,9 +3,9 @@ package com.handicraft.server.repository;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import com.handicraft.server.model.PosterStock;
+import com.handicraft.server.model.CoasterStock;
 
 @Repository
-public interface PosterStockRepository extends MongoRepository<PosterStock, String> {
+public interface CoasterStockRepository extends MongoRepository<CoasterStock, String> {
 
 }

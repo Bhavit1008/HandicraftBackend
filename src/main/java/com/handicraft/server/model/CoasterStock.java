@@ -3,9 +3,9 @@ package com.handicraft.server.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-/** Current stock count for one poster variant (shape + finish + quality). */
-@Document("PosterStock")
-public class PosterStock {
+/** Current stock count for one coaster variant (shape + finish + quality). */
+@Document("CoasterStock")
+public class CoasterStock {
 
     @Id
     private String id;
@@ -20,14 +20,14 @@ public class PosterStock {
     private int stock;
     private String remarks;
 
-    /** Display order on the Poster Stock sheet. */
+    /** Display order on the Coaster Stock sheet. */
     private int sortOrder;
 
     private String updatedBy;
     private Long updatedAt;
     private Long createdAt;
 
-    public PosterStock() {
+    public CoasterStock() {
     }
 
     public String getId() {

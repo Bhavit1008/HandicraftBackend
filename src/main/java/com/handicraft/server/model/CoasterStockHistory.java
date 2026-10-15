@@ -4,15 +4,15 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.index.Indexed;
 
-/** One entry per poster stock change — who changed which variant, from what to what, and when. */
-@Document("PosterStockHistory")
-public class PosterStockHistory {
+/** One entry per coaster stock change — who changed which variant, from what to what, and when. */
+@Document("CoasterStockHistory")
+public class CoasterStockHistory {
 
     @Id
     private String id;
 
     @Indexed
-    private String posterStockId;
+    private String coasterStockId;
 
     // Denormalized so the history reads on its own even if the variant is later renamed.
     private String shape;
@@ -33,7 +33,7 @@ public class PosterStockHistory {
     /** Business day of the change (yyyy-MM-dd in the configured app timezone), for day-wise grouping. */
     private String date;
 
-    public PosterStockHistory() {
+    public CoasterStockHistory() {
     }
 
     public String getId() {
@@ -44,12 +44,12 @@ public class PosterStockHistory {
         this.id = id;
     }
 
-    public String getPosterStockId() {
-        return posterStockId;
+    public String getCoasterStockId() {
+        return coasterStockId;
     }
 
-    public void setPosterStockId(String posterStockId) {
-        this.posterStockId = posterStockId;
+    public void setCoasterStockId(String coasterStockId) {
+        this.coasterStockId = coasterStockId;
     }
 
     public String getShape() {
